@@ -10,28 +10,28 @@ const charTime = 100; // ms
 const sleepTime = 2000; // ms
 
 (async function typeWriter() {
-	for (let i = 0; i < textArray.length; i++) {
+	while(true) {
+		for (let i = 0; i < textArray.length; i++) {
 
-		elementId.innerHTML = '';
-		let charArray = textArray[i].split('');
-
-		charArray.forEach((letter, j) => 
-			setTimeout(() => (elementId.innerHTML += letter), charTime * j)
-		);
-		
-		// need to wait for all characters to appear, then sleep
-		let totalSleepTime = sleepTime + charArray.length * charTime;
-		await sleep(totalSleepTime); 
-
-		charArray.forEach((letter, j) => {
-				setTimeout(() => {
-					elementId.innerHTML = elementId.innerHTML.slice(0, -1); 
-				}, charTime * j);
-			}
-		);
-
-		await sleep(totalSleepTime);
+			elementId.innerHTML = '';
+			let charArray = textArray[i].split('');
+	
+			charArray.forEach((letter, j) => 
+				setTimeout(() => (elementId.innerHTML += letter), charTime * j)
+			);
+			
+			// need to wait for all characters to appear, then sleep
+			let totalSleepTime = sleepTime + charArray.length * charTime;
+			await sleep(totalSleepTime); 
+	
+			charArray.forEach((letter, j) => {
+					setTimeout(() => {
+						elementId.innerHTML = elementId.innerHTML.slice(0, -1); 
+					}, charTime * j);
+				}
+			);
+	
+			await sleep(totalSleepTime);
+		}
 	}
-
-	setTimeout(typeWriter, sleepTime);
 })()

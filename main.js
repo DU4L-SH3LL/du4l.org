@@ -9,7 +9,7 @@ const elementId = typewriterText;
 const charTime = 100; // ms
 const sleepTime = 2000; // ms
 
-(async function typeWriter() {
+async function typeWriter() {
 	while(true) {
 		for (let i = 0; i < textArray.length; i++) {
 
@@ -34,4 +34,11 @@ const sleepTime = 2000; // ms
 			await sleep(totalSleepTime);
 		}
 	}
-})()
+}
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!prefersReducedMotion) {
+	typeWriter();
+} else {
+	elementId.innerHTML += textArray[textArray.length-1];
+}
